@@ -150,7 +150,7 @@ function createSnowflakes(container, count) {
         snowflake.className = 'snowflake';
         snowflake.textContent = symbols[Math.floor(Math.random() * symbols.length)];
         snowflake.style.left = Math.random() * 100 + '%';
-        snowflake.style.animationDuration = (Math.random() * 5 + 8) + 's'; // Медленнее (8-13 секунд)
+        snowflake.style.animationDuration = (Math.random() * 3 + 4) + 's'; // Ускорено (4-7 секунд вместо 8-13)
         snowflake.style.animationDelay = Math.random() * 2 + 's';
         container.appendChild(snowflake);
     }
@@ -271,9 +271,9 @@ function showCrackPage() {
     // Вычисляем нужное количество снежинок: 5 + 2*N (где N - номер страницы, начиная с 0)
     neededSnowflakes = 5 + 2 * currentCrackPage;
     
-    // Увеличение сложности - меняется только скорость появления
-    const baseSpeed = 8000;
-    snowflakeSpeed = Math.max(6000, baseSpeed + currentCrackPage * 500); // Медленнее с каждой страницей
+    // Увеличение сложности - меняется только скорость появления (ускорено)
+    const baseSpeed = 4000; // Было 8000, ускорено в 2 раза
+    snowflakeSpeed = Math.max(3000, baseSpeed + currentCrackPage * 250); // Быстрее (было 6000, стало 3000)
     
     // Скорость появления новых снежинок (чем выше страница, тем реже появляются)
     const spawnInterval = Math.max(1000, 2000 - currentCrackPage * 100); // От 2 сек до 1 сек
@@ -320,9 +320,9 @@ function startGradualCracks(container) {
         clearInterval(crackInterval);
     }
     
-    // Количество трещин увеличивается с каждой страницей (в 2 раза больше)
-    const baseCracks = 10; // Было 5, стало 10
-    const cracksPerPage = 20; // Было 10, стало 20
+    // Количество трещин увеличивается с каждой страницей (в 10 раз больше)
+    const baseCracks = 100; // В 10 раз больше
+    const cracksPerPage = 200; // В 10 раз больше
     const totalCracks = baseCracks + currentCrackPage * cracksPerPage;
     
     let cracksCreated = 0;
