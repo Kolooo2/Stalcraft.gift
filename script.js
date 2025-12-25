@@ -71,9 +71,9 @@ let backgroundMusic = null; // Элемент фоновой музыки (Last 
 let horrorMusic = null; // Элемент музыки ужасов
 let scrimerMusic = null; // Элемент музыки скримера
 let totalScore = 0; // Общий счет очков
-let previousMusicVolume = 0.3; // Предыдущая громкость музыки
+let previousMusicVolume = 0.27; // Предыдущая громкость музыки (уменьшено на 10%)
 let horrorVolume = 0; // Громкость horror музыки (начинается с 0)
-let christmasVolume = 0.3; // Громкость Christmas музыки
+let christmasVolume = 0.27; // Громкость Christmas музыки (уменьшено на 10%)
 let giftButtonEscapes = 0; // Счетчик побегов кнопки
 
 // Инициализация аудио контекста
@@ -117,7 +117,7 @@ function initBackgroundMusic() {
     }
     
     if (scrimerMusic) {
-        scrimerMusic.volume = 0.5;
+        scrimerMusic.volume = 0.45; // Уменьшено на 10% (было 0.5)
         scrimerMusic.load();
     }
 }
@@ -306,8 +306,8 @@ function updateMusicForCracksPage() {
         horrorMusic.volume = horrorVolume;
     }
     
-    // Уменьшаем Christmas музыку на 8% с каждой страницей
-    christmasVolume = Math.max(0, christmasVolume - 0.08);
+    // Уменьшаем Christmas музыку на 5% с каждой страницей
+    christmasVolume = Math.max(0, christmasVolume - 0.05);
     if (backgroundMusic) {
         backgroundMusic.volume = christmasVolume;
     }
@@ -547,7 +547,7 @@ function resetToStart() {
     scrimerHits = 0;
     totalScore = 0;
     horrorVolume = 0; // Сброс громкости horror
-    christmasVolume = 0.3; // Сброс громкости Christmas
+    christmasVolume = 0.27; // Сброс громкости Christmas (уменьшено на 10%)
     giftButtonEscapes = 0; // Сброс счетчика побегов
     
     // Остановка всех интервалов
@@ -595,7 +595,7 @@ function handleSantaAnswer() {
                 horrorMusic.pause();
             }
             if (backgroundMusic) {
-                backgroundMusic.volume = 0.3; // Возвращаем нормальную громкость
+                backgroundMusic.volume = 0.27; // Возвращаем нормальную громкость (уменьшено на 10%)
                 if (backgroundMusic.paused) {
                     backgroundMusic.play();
                 }

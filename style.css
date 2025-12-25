@@ -50,7 +50,7 @@ body {
     position: absolute;
     top: -10px;
     color: #fff;
-    font-size: 1em;
+    font-size: 1.3em; /* Увеличено с 1em */
     font-family: Arial;
     text-shadow: 0 0 5px #fff;
     animation: fall linear infinite;
@@ -239,7 +239,7 @@ body {
     position: absolute;
     top: -10px;
     color: #fff;
-    font-size: 1.2em;
+    font-size: 1.5em; /* Увеличено с 1.2em */
     font-family: Arial;
     text-shadow: 0 0 5px #fff;
     animation: fallInteractive linear infinite;
