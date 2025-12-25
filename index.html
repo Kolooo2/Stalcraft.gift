@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Фоновая музыка -->
     <audio id="background-music" loop>
@@ -18,12 +20,18 @@
     <audio id="scrimer-music">
         <source src="02579.mp3" type="audio/mpeg">
     </audio>
+
     <!-- Главная страница -->
     <div id="main-page" class="page active">
+        <div class="radiation-icon left">☢</div>
+        <div class="radiation-icon right">☢</div>
         <div class="snowflakes"></div>
+        <div class="scanner-line"></div>
         <div class="content">
+            <div class="zone-emblem">☢</div>
+            <div class="stalcraft-badge">STALCRAFT</div>
             <h1 class="main-title">С Новым Годом!</h1>
-            <p class="subtitle">Добро пожаловать в зону, сталкер!</p>
+            <p class="subtitle">Добро пожаловать в <span>Зону</span>, сталкер!</p>
             <button id="start-btn" class="btn btn-primary">Пройти проверку Деда Мороза</button>
         </div>
     </div>
@@ -35,6 +43,9 @@
                 <h2>Проверка знаний по Stalcraft</h2>
                 <div class="quiz-progress">
                     <span id="question-number">1</span> / 10
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 10%"></div>
+                    </div>
                 </div>
             </div>
             <div class="question-container">
@@ -47,13 +58,14 @@
     <!-- Страница с результатами викторины -->
     <div id="quiz-result-page" class="page">
         <div class="quiz-result-content">
-            <h1 class="quiz-result-title">Плохо...</h1>
+            <h1 class="quiz-result-title">Результат проверки</h1>
             <p class="quiz-result-score"><span id="quiz-result-number">0</span> / 10</p>
         </div>
     </div>
 
     <!-- Страницы с трещинами -->
     <div id="cracks-pages" class="page">
+        <div class="snowflake-counter" id="snowflake-counter">❄ 0 / 0</div>
         <div class="snowflakes-interactive" id="interactive-snowflakes"></div>
         <div class="cracks-overlay" id="cracks-overlay"></div>
     </div>
@@ -62,16 +74,16 @@
     <div id="scrimer-page" class="page">
         <img src="png-klev-club-p-skrimer-png-14.png" alt="Scrimer" id="scrimer-image">
         <div class="scrimer-hits">
-            <p>Ударов: <span id="scrimer-hit-count">0</span> / 15</p>
+            <p>⚔ Ударов: <span id="scrimer-hit-count">0</span> / 15</p>
         </div>
     </div>
 
     <!-- Страница с очками -->
     <div id="score-page" class="page">
         <div class="score-content">
-            <h1 class="score-title">Ваши очки</h1>
+            <h1 class="score-title">☢ Ваши очки ☢</h1>
             <p class="score-amount"><span id="score-display">0</span></p>
-            <p class="score-requirement">Нужно набрать: 400</p>
+            <p class="score-requirement">Нужно набрать: 400 очков</p>
         </div>
     </div>
 
@@ -80,9 +92,9 @@
         <div class="santa-container">
             <div class="santa-content">
                 <h2>🎅 Дед Мороз спрашивает:</h2>
-                <p class="santa-question">Как вёл себя мальчик в этом году?</p>
-                <textarea id="behavior-input" placeholder="Расскажи о своём поведении..." rows="5"></textarea>
-                <button id="answer-btn" class="btn btn-primary">Ответить</button>
+                <p class="santa-question">Как вёл себя мальчик в этом году?<br>Расскажи честно, сталкер!</p>
+                <textarea id="behavior-input" placeholder="Расскажи о своём поведении в Зоне..." rows="5"></textarea>
+                <button id="answer-btn" class="btn btn-primary">Отправить ответ</button>
             </div>
         </div>
     </div>
@@ -92,20 +104,21 @@
         <div class="snowflakes-final"></div>
         <div class="final-container">
             <div class="final-content">
-                <h1 class="final-title">🎄 Поздравляем! 🎄</h1>
+                <h1 class="final-title">🎄 Поздравляем, Сталкер! 🎄</h1>
                 <div class="poem">
-                    <p>В зоне сталкер бродит смело,</p>
-                    <p>Аномалии встречает,</p>
-                    <p>Артефакты собирает,</p>
-                    <p>Новый год встречает дело!</p>
+                    <p>В Зоне снег на ёлках тает,</p>
+                    <p>Аномалии сверкают,</p>
+                    <p>Артефакты собираем,</p>
+                    <p>Новый год с тобой встречаем!</p>
                 </div>
                 <div class="gift-box">
                     <h2>Подарок от Деда Мороза:</h2>
                     <p class="gift-amount">500 рублей доната!</p>
-                    <button id="get-gift-btn" class="btn btn-gift">Получить</button>
+                    <button id="get-gift-btn" class="btn-gift">Получить</button>
                 </div>
                 <div class="joke">
-                    <p>Только на 500, потому что ты до сих пор не стал ютубером-тысячником по Stalcraft, и Деду Морозу нечего смотреть во время отпуска</p>
+                    <p>Только 500, потому что ты до сих пор не стал ютубером-тысячником по Stalcraft, и Деду Морозу
+                        нечего смотреть во время отпуска 😄</p>
                 </div>
             </div>
         </div>
@@ -113,4 +126,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

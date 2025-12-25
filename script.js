@@ -1,54 +1,59 @@
-// Вопросы викторины по Stalcraft
+// Улучшенные вопросы викторины по Stalcraft с более интересными и разнообразными вопросами
 const quizQuestions = [
     {
-        question: "Как называется главная локация в Stalcraft?",
-        answers: ["Зона", "Чернобыль", "Припять", "Аномальная зона"],
-        correct: 0
+        question: "Какую фракцию называют 'борцами за свободу Зоны', выступающую против военного контроля?",
+        answers: ["Долг", "Свобода", "Бандиты", "Монолит"],
+        correct: 1
     },
     {
-        question: "Какой артефакт даёт защиту от радиации?",
-        answers: ["Каменный цветок", "Лунный свет", "Пузырь", "Мясорубка"],
+        question: "Какой артефакт в Stalcraft известен своей способностью восстанавливать здоровье, но при этом накапливает радиацию?",
+        answers: ["Каменный цветок", "Душа", "Медуза", "Кровь камня"],
         correct: 2
     },
     {
-        question: "Какие фракции существуют в игре?",
-        answers: ["Стрелковцы и Бандиты", "Свобода и Долг", "Наёмники и Военные", "Все вышеперечисленные"],
-        correct: 3
-    },
-    {
-        question: "Что такое аномалия 'Грави'?",
-        answers: ["Электрическая аномалия", "Гравитационная аномалия", "Термическая аномалия", "Химическая аномалия"],
+        question: "Как называется опасная гравитационная аномалия, которая притягивает и разрывает всё, что попадает в её радиус?",
+        answers: ["Трамплин", "Воронка", "Электра", "Жарка"],
         correct: 1
     },
     {
-        question: "Как называется оружие, которое стреляет артефактами?",
-        answers: ["Артефакт-пушка", "Эмиттер", "Гаусс-пушка", "Плазменная пушка"],
+        question: "Какое событие в игре происходит каждые несколько часов и заставляет всех сталкеров искать укрытие?",
+        answers: ["Рейд", "Выброс", "Гон мутантов", "Ночной шторм"],
         correct: 1
     },
     {
-        question: "Где находится база Стрелковцев?",
-        answers: ["Ростов", "Кордон", "Даркволл", "Ростов-на-Дону"],
-        correct: 3
-    },
-    {
-        question: "Что такое 'сталкер' в игре?",
-        answers: ["Охотник за артефактами", "Военный", "Учёный", "Торговец"],
+        question: "Какой мутант в Зоне известен своей способностью становиться невидимым и внезапно атаковать?",
+        answers: ["Кровосос", "Псевдогигант", "Контролёр", "Бюрер"],
         correct: 0
     },
     {
-        question: "Какая валюта используется в игре?",
-        answers: ["Рубли", "Доллары", "Евро", "Рубли и Доллары"],
-        correct: 3
+        question: "Как называется редкий артефакт, который значительно увеличивает выносливость сталкера?",
+        answers: ["Пружина", "Батарейка", "Ломоть мяса", "Вывих"],
+        correct: 0
     },
     {
-        question: "Что происходит при попадании в аномалию?",
-        answers: ["Мгновенная смерть", "Урон здоровью", "Ничего", "Зависит от типа аномалии"],
-        correct: 3
+        question: "Какая группировка считает Зону священным местом и защищает подходы к центру ЧАЭС?",
+        answers: ["Военные", "Учёные", "Монолит", "Наёмники"],
+        correct: 2
     },
     {
-        question: "Как называется система улучшения оружия?",
-        answers: ["Модификация", "Апгрейд", "Тюнинг", "Улучшение"],
-        correct: 1
+        question: "Что такое 'детектор аномалий' и для чего он используется в Зоне?",
+        answers: [
+            "Для поиска артефактов и обнаружения аномалий",
+            "Для связи с другими сталкерами",
+            "Для измерения уровня радиации",
+            "Для ночного видения"
+        ],
+        correct: 0
+    },
+    {
+        question: "Какой тип оружия в Stalcraft считается наиболее эффективным против мутантов в ближнем бою?",
+        answers: ["Снайперская винтовка", "Пистолет", "Дробовик", "Автомат"],
+        correct: 2
+    },
+    {
+        question: "Как называется система улучшения снаряжения, позволяющая усилить характеристики оружия и брони?",
+        answers: ["Крафтинг", "Модификация", "Апгрейд", "Тюнинг"],
+        correct: 2
     }
 ];
 
@@ -57,24 +62,24 @@ let currentQuestion = 0;
 let correctAnswers = 0;
 let currentCrackPage = 0;
 let totalCrackPages = 0;
-let snowflakeSpeed = 2000; // миллисекунды для падения
-let snowflakeCount = 5; // начальное количество снежинок
+let snowflakeSpeed = 2000;
+let snowflakeCount = 5;
 let audioContext = null;
-let collectedSnowflakes = 0; // Счетчик собранных снежинок
-let neededSnowflakes = 0; // Нужное количество снежинок для перехода
-let crackInterval = null; // Интервал для постепенного появления трещин
-let snowflakeInterval = null; // Интервал для создания новых снежинок
-let activeSnowflakes = 0; // Количество активных снежинок на экране
-let maxActiveSnowflakes = 8; // Максимальное количество снежинок одновременно
-let scrimerHits = 0; // Счетчик ударов по скримеру
-let backgroundMusic = null; // Элемент фоновой музыки (Last Christmas)
-let horrorMusic = null; // Элемент музыки ужасов
-let scrimerMusic = null; // Элемент музыки скримера
-let totalScore = 0; // Общий счет очков
-let previousMusicVolume = 0.27; // Предыдущая громкость музыки (уменьшено на 10%)
-let horrorVolume = 0; // Громкость horror музыки (начинается с 0)
-let christmasVolume = 0.27; // Громкость Christmas музыки (уменьшено на 10%)
-let giftButtonEscapes = 0; // Счетчик побегов кнопки
+let collectedSnowflakes = 0;
+let neededSnowflakes = 0;
+let crackInterval = null;
+let snowflakeInterval = null;
+let activeSnowflakes = 0;
+let maxActiveSnowflakes = 10;
+let scrimerHits = 0;
+let backgroundMusic = null;
+let horrorMusic = null;
+let scrimerMusic = null;
+let totalScore = 0;
+let previousMusicVolume = 0.27;
+let horrorVolume = 0;
+let christmasVolume = 0.27;
+let giftButtonEscapes = 0;
 
 // Инициализация аудио контекста
 function initAudioContext() {
@@ -93,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initMainPage();
     initButtons();
     initBackgroundMusic();
-    // Инициализируем аудио при первом клике
     document.addEventListener('click', () => {
         initAudioContext();
         startBackgroundMusic();
@@ -105,19 +109,19 @@ function initBackgroundMusic() {
     backgroundMusic = document.getElementById('background-music');
     horrorMusic = document.getElementById('horror-music');
     scrimerMusic = document.getElementById('scrimer-music');
-    
+
     if (backgroundMusic) {
-        backgroundMusic.volume = christmasVolume; // Громкость 30%
+        backgroundMusic.volume = christmasVolume;
         backgroundMusic.load();
     }
-    
+
     if (horrorMusic) {
-        horrorMusic.volume = 0; // Начинаем с 0
+        horrorMusic.volume = 0;
         horrorMusic.load();
     }
-    
+
     if (scrimerMusic) {
-        scrimerMusic.volume = 0.45; // Уменьшено на 10% (было 0.5)
+        scrimerMusic.volume = 0.45;
         scrimerMusic.load();
     }
 }
@@ -139,19 +143,23 @@ function startBackgroundMusic() {
 // Инициализация главной страницы
 function initMainPage() {
     const snowflakesContainer = document.querySelector('.snowflakes');
-    createSnowflakes(snowflakesContainer, 5); // Чуть больше снежинок
+    if (snowflakesContainer) {
+        createSnowflakes(snowflakesContainer, 15);
+    }
 }
 
-// Создание снежинок
+// Создание снежинок с улучшенными эффектами
 function createSnowflakes(container, count) {
-    const symbols = ['❄', '❅', '❆', '✻', '✼'];
+    const symbols = ['❄', '❅', '❆', '✻', '✼', '❉'];
     for (let i = 0; i < count; i++) {
         const snowflake = document.createElement('div');
         snowflake.className = 'snowflake';
         snowflake.textContent = symbols[Math.floor(Math.random() * symbols.length)];
         snowflake.style.left = Math.random() * 100 + '%';
-        snowflake.style.animationDuration = (Math.random() * 3 + 4) + 's'; // Ускорено (4-7 секунд вместо 8-13)
-        snowflake.style.animationDelay = Math.random() * 2 + 's';
+        snowflake.style.animationDuration = (Math.random() * 5 + 6) + 's';
+        snowflake.style.animationDelay = Math.random() * 5 + 's';
+        snowflake.style.fontSize = (Math.random() * 1.5 + 1) + 'em';
+        snowflake.style.opacity = Math.random() * 0.5 + 0.5;
         container.appendChild(snowflake);
     }
 }
@@ -160,7 +168,7 @@ function createSnowflakes(container, count) {
 function initButtons() {
     const startBtn = document.getElementById('start-btn');
     const answerBtn = document.getElementById('answer-btn');
-    
+
     if (startBtn) {
         startBtn.addEventListener('click', startQuiz);
     }
@@ -173,9 +181,19 @@ function initButtons() {
 function startQuiz() {
     currentQuestion = 0;
     correctAnswers = 0;
-    totalScore = 0; // Сброс очков при начале новой игры
+    totalScore = 0;
     showPage('quiz-page');
     displayQuestion();
+    updateProgressBar();
+}
+
+// Обновление прогресс-бара
+function updateProgressBar() {
+    const progressFill = document.getElementById('progress-fill');
+    if (progressFill) {
+        const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+        progressFill.style.width = progress + '%';
+    }
 }
 
 // Отображение вопроса
@@ -183,10 +201,12 @@ function displayQuestion() {
     const question = quizQuestions[currentQuestion];
     document.getElementById('question-text').textContent = question.question;
     document.getElementById('question-number').textContent = currentQuestion + 1;
-    
+
+    updateProgressBar();
+
     const answersContainer = document.getElementById('answers-container');
     answersContainer.innerHTML = '';
-    
+
     question.answers.forEach((answer, index) => {
         const button = document.createElement('button');
         button.className = 'answer-btn';
@@ -200,22 +220,20 @@ function displayQuestion() {
 function handleAnswer(selectedIndex) {
     const question = quizQuestions[currentQuestion];
     const buttons = document.querySelectorAll('.answer-btn');
-    
-    // Отключаем все кнопки
+
     buttons.forEach(btn => btn.disabled = true);
-    
-    // Подсвечиваем правильный и неправильный ответы
+
     if (selectedIndex === question.correct) {
         buttons[selectedIndex].classList.add('correct');
         correctAnswers++;
-        playCorrectSound(); // Звук правильного ответа
+        totalScore += 50; // Бонус за правильный ответ
+        playCorrectSound();
     } else {
         buttons[selectedIndex].classList.add('incorrect');
         buttons[question.correct].classList.add('correct');
-        playIncorrectSound(); // Звук неправильного ответа
+        playIncorrectSound();
     }
-    
-    // Переход к следующему вопросу через 1.5 секунды
+
     setTimeout(() => {
         currentQuestion++;
         if (currentQuestion < quizQuestions.length) {
@@ -229,29 +247,47 @@ function handleAnswer(selectedIndex) {
 // Показать результаты викторины
 function showQuizResult() {
     showPage('quiz-result-page');
-    document.getElementById('quiz-result-number').textContent = correctAnswers;
+    const resultTitle = document.querySelector('.quiz-result-title');
+    const resultNumber = document.getElementById('quiz-result-number');
+
+    if (resultNumber) {
+        resultNumber.textContent = correctAnswers;
+    }
+
+    if (resultTitle) {
+        if (correctAnswers >= 8) {
+            resultTitle.textContent = "Отличный результат! 🎯";
+        } else if (correctAnswers >= 5) {
+            resultTitle.textContent = "Неплохо, сталкер! 👍";
+        } else {
+            resultTitle.textContent = "Нужно больше практики... 📚";
+        }
+    }
+
     setTimeout(() => {
         startCracksPages();
-    }, 2000); // Показываем 2 секунды
+    }, 2500);
 }
 
 // Начало страниц с трещинами
 function startCracksPages() {
-    totalCrackPages = correctAnswers;
+    totalCrackPages = Math.max(1, correctAnswers);
     currentCrackPage = 0;
-    if (totalCrackPages > 0) {
-        showCrackPage();
-    } else {
-        // Если нет правильных ответов, сразу к скримеру
-        showScrimer();
+    showCrackPage();
+}
+
+// Обновление счетчика снежинок
+function updateSnowflakeCounter() {
+    const counter = document.getElementById('snowflake-counter');
+    if (counter) {
+        counter.textContent = `❄ ${collectedSnowflakes} / ${neededSnowflakes}`;
     }
 }
 
 // Показать страницу с трещинами
 function showCrackPage() {
     showPage('cracks-pages');
-    
-    // Сброс состояния
+
     const container = document.getElementById('interactive-snowflakes');
     const cracksOverlay = document.getElementById('cracks-overlay');
     container.innerHTML = '';
@@ -259,54 +295,44 @@ function showCrackPage() {
     cracksOverlay.classList.remove('active');
     collectedSnowflakes = 0;
     activeSnowflakes = 0;
-    
-    // Останавливаем предыдущие интервалы
+
     if (snowflakeInterval) {
         clearInterval(snowflakeInterval);
     }
     if (crackInterval) {
         clearInterval(crackInterval);
     }
-    
-    // Вычисляем нужное количество снежинок: 5 + 2*N (где N - номер страницы, начиная с 0)
+
     neededSnowflakes = 5 + 2 * currentCrackPage;
-    
-    // Увеличение сложности - меняется только скорость появления (ускорено)
-    const baseSpeed = 4000; // Было 8000, ускорено в 2 раза
-    snowflakeSpeed = Math.max(3000, baseSpeed + currentCrackPage * 250); // Быстрее (было 6000, стало 3000)
-    
-    // Скорость появления новых снежинок (чем выше страница, тем реже появляются)
-    const spawnInterval = Math.max(1000, 2000 - currentCrackPage * 100); // От 2 сек до 1 сек
-    
-    // Создаем начальные снежинки
-    const initialCount = 5;
+    updateSnowflakeCounter();
+
+    const baseSpeed = 4000;
+    snowflakeSpeed = Math.max(3000, baseSpeed + currentCrackPage * 250);
+
+    const spawnInterval = Math.max(800, 1800 - currentCrackPage * 100);
+
+    const initialCount = 6;
     for (let i = 0; i < initialCount; i++) {
-        createSingleSnowflake(container);
+        setTimeout(() => createSingleSnowflake(container), i * 200);
     }
-    
-    // Запускаем бесконечное создание снежинок
+
     snowflakeInterval = setInterval(() => {
         if (activeSnowflakes < maxActiveSnowflakes) {
             createSingleSnowflake(container);
         }
     }, spawnInterval);
-    
-    // Запуск постепенного появления трещин
+
     startGradualCracks(cracksOverlay);
-    
-    // Управление музыкой на страницах с трещинами
     updateMusicForCracksPage();
 }
 
 // Обновление музыки для страниц с трещинами
 function updateMusicForCracksPage() {
-    // Увеличиваем horror музыку на 15% с каждой страницей
     horrorVolume = Math.min(1, horrorVolume + 0.15);
     if (horrorMusic) {
         horrorMusic.volume = horrorVolume;
     }
-    
-    // Уменьшаем Christmas музыку на 5% с каждой страницей
+
     christmasVolume = Math.max(0, christmasVolume - 0.05);
     if (backgroundMusic) {
         backgroundMusic.volume = christmasVolume;
@@ -315,19 +341,16 @@ function updateMusicForCracksPage() {
 
 // Постепенное появление трещин
 function startGradualCracks(container) {
-    // Очищаем предыдущий интервал
     if (crackInterval) {
         clearInterval(crackInterval);
     }
-    
-    // Количество трещин увеличивается с каждой страницей (в 10 раз больше)
-    const baseCracks = 100; // В 10 раз больше
-    const cracksPerPage = 200; // В 10 раз больше
+
+    const baseCracks = 50;
+    const cracksPerPage = 100;
     const totalCracks = baseCracks + currentCrackPage * cracksPerPage;
-    
+
     let cracksCreated = 0;
-    
-    // Создаем трещины постепенно каждые 2 секунды
+
     crackInterval = setInterval(() => {
         if (cracksCreated < totalCracks) {
             createSingleCrack(container);
@@ -335,22 +358,22 @@ function startGradualCracks(container) {
         } else {
             clearInterval(crackInterval);
         }
-    }, 2000); // Каждые 2 секунды новая трещина
+    }, 1500);
 }
 
 // Создание одной снежинки
 function createSingleSnowflake(container) {
-    const symbols = ['❄', '❅', '❆', '✻', '✼'];
+    const symbols = ['❄', '❅', '❆', '✻', '✼', '❉'];
     const snowflake = document.createElement('div');
     snowflake.className = 'snowflake-interactive';
     snowflake.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-    snowflake.style.left = Math.random() * 100 + '%';
+    snowflake.style.left = (Math.random() * 90 + 5) + '%';
     snowflake.style.animationDuration = (snowflakeSpeed / 1000) + 's';
     snowflake.style.animationDelay = '0s';
-    
+    snowflake.style.fontSize = (2 + Math.random() * 1) + 'em';
+
     activeSnowflakes++;
-    
-    // Удаляем снежинку когда она уходит за экран
+
     const animationDuration = snowflakeSpeed / 1000;
     setTimeout(() => {
         if (snowflake.parentNode && !snowflake.classList.contains('broken')) {
@@ -358,34 +381,30 @@ function createSingleSnowflake(container) {
             activeSnowflakes--;
         }
     }, animationDuration * 1000);
-    
+
     snowflake.addEventListener('click', () => {
         if (!snowflake.classList.contains('broken')) {
             snowflake.classList.add('broken');
             playSnowflakeSound();
             collectedSnowflakes++;
             activeSnowflakes--;
-            
-            // Даем 10 очков за каждую снежинку
+
             totalScore += 10;
-            
-            // Удаляем снежинку через небольшую задержку после анимации
+            updateSnowflakeCounter();
+
             setTimeout(() => {
                 if (snowflake.parentNode) {
                     snowflake.remove();
                 }
-            }, 500);
-            
-            // Проверяем, собрали ли нужное количество
+            }, 400);
+
             if (collectedSnowflakes >= neededSnowflakes) {
-                // Останавливаем создание трещин и снежинок
                 if (crackInterval) {
                     clearInterval(crackInterval);
                 }
                 if (snowflakeInterval) {
                     clearInterval(snowflakeInterval);
                 }
-                // Переход к следующей странице
                 setTimeout(() => {
                     currentCrackPage++;
                     if (currentCrackPage < totalCrackPages) {
@@ -397,7 +416,7 @@ function createSingleSnowflake(container) {
             }
         }
     });
-    
+
     container.appendChild(snowflake);
 }
 
@@ -405,41 +424,37 @@ function createSingleSnowflake(container) {
 function createSingleCrack(container) {
     const crack = document.createElement('div');
     crack.className = 'crack';
-    
-    // Случайная позиция и размер
+
     const x = Math.random() * 100;
     const y = Math.random() * 100;
-    const length = 150 + Math.random() * 300; // Длиннее трещины
+    const length = 100 + Math.random() * 250;
     const angle = Math.random() * 360;
-    
+
     crack.style.left = x + '%';
     crack.style.top = y + '%';
     crack.style.width = length + 'px';
     crack.style.height = '2px';
     crack.style.transform = `rotate(${angle}deg)`;
     crack.style.transformOrigin = '0 50%';
-    
+
     container.appendChild(crack);
-    
-    // Активация overlay при первой трещине
+
     if (!container.classList.contains('active')) {
         container.classList.add('active');
     }
-    
-    // Звук трещины
+
     playCrackSound();
 }
 
 // Показать скример
 function showScrimer() {
     showPage('scrimer-page');
-    scrimerHits = 0; // Сброс счетчика
+    scrimerHits = 0;
     const hitCountElement = document.getElementById('scrimer-hit-count');
     if (hitCountElement) {
         hitCountElement.textContent = scrimerHits;
     }
-    
-    // Останавливаем все музыки и включаем только скример
+
     if (backgroundMusic) {
         previousMusicVolume = backgroundMusic.volume;
         backgroundMusic.pause();
@@ -453,24 +468,21 @@ function showScrimer() {
             console.log('Не удалось воспроизвести музыку скримера:', error);
         });
     }
-    
-    // Звук скримера
+
     playScrimerSound();
-    
-    // Добавляем обработчик кликов по скримеру
+
     const scrimerImage = document.getElementById('scrimer-image');
     const scrimerPage = document.getElementById('scrimer-page');
-    
+
     let timeoutId = null;
-    
+
     const handleScrimerClick = (e) => {
         e.stopPropagation();
         scrimerHits++;
         if (hitCountElement) {
             hitCountElement.textContent = scrimerHits;
         }
-        
-        // Визуальный эффект при клике
+
         if (scrimerImage) {
             scrimerImage.style.transform = 'scale(0.95)';
             setTimeout(() => {
@@ -479,11 +491,9 @@ function showScrimer() {
                 }
             }, 100);
         }
-        
-        // Звук удара
+
         playHitSound();
-        
-        // Если набрали 15 ударов, переходим дальше
+
         if (scrimerHits >= 15) {
             if (scrimerPage) {
                 scrimerPage.removeEventListener('click', handleScrimerClick);
@@ -491,7 +501,6 @@ function showScrimer() {
             if (timeoutId) {
                 clearTimeout(timeoutId);
             }
-            // Останавливаем музыку скримера
             if (scrimerMusic) {
                 scrimerMusic.pause();
             }
@@ -500,17 +509,14 @@ function showScrimer() {
             }, 300);
         }
     };
-    
-    // Добавляем обработчик на всю страницу
+
     if (scrimerPage) {
         scrimerPage.addEventListener('click', handleScrimerClick);
     }
-    
-    // Если через 15 секунд не набрали 10 ударов, переходим автоматически
+
     timeoutId = setTimeout(() => {
         if (scrimerHits < 10 && scrimerPage) {
             scrimerPage.removeEventListener('click', handleScrimerClick);
-            // Останавливаем музыку скримера
             if (scrimerMusic) {
                 scrimerMusic.pause();
             }
@@ -523,13 +529,11 @@ function showScrimer() {
 function showScorePage() {
     showPage('score-page');
     document.getElementById('score-display').textContent = totalScore;
-    
-    // Показываем страницу 3 секунды, затем проверяем очки
+
     setTimeout(() => {
         if (totalScore >= 400) {
             showPage('santa-page');
         } else {
-            // Возвращаем на главную страницу
             resetToStart();
         }
     }, 3000);
@@ -537,7 +541,6 @@ function showScorePage() {
 
 // Сброс на главную страницу
 function resetToStart() {
-    // Сброс всех переменных
     currentQuestion = 0;
     correctAnswers = 0;
     currentCrackPage = 0;
@@ -546,11 +549,10 @@ function resetToStart() {
     activeSnowflakes = 0;
     scrimerHits = 0;
     totalScore = 0;
-    horrorVolume = 0; // Сброс громкости horror
-    christmasVolume = 0.27; // Сброс громкости Christmas (уменьшено на 10%)
-    giftButtonEscapes = 0; // Сброс счетчика побегов
-    
-    // Остановка всех интервалов
+    horrorVolume = 0;
+    christmasVolume = 0.27;
+    giftButtonEscapes = 0;
+
     if (crackInterval) {
         clearInterval(crackInterval);
         crackInterval = null;
@@ -559,8 +561,7 @@ function resetToStart() {
         clearInterval(snowflakeInterval);
         snowflakeInterval = null;
     }
-    
-    // Сброс музыки
+
     if (backgroundMusic) {
         backgroundMusic.volume = christmasVolume;
         backgroundMusic.pause();
@@ -572,15 +573,13 @@ function resetToStart() {
     if (scrimerMusic) {
         scrimerMusic.pause();
     }
-    
-    // Возврат на главную страницу
+
     showPage('main-page');
-    
-    // Пересоздаем снежинки на главной
+
     const snowflakesContainer = document.querySelector('.snowflakes');
     if (snowflakesContainer) {
         snowflakesContainer.innerHTML = '';
-        createSnowflakes(snowflakesContainer, 5);
+        createSnowflakes(snowflakesContainer, 15);
     }
 }
 
@@ -588,34 +587,30 @@ function resetToStart() {
 function handleSantaAnswer() {
     const input = document.getElementById('behavior-input');
     if (input.value.trim()) {
-        // Проверяем очки перед показом финальной страницы
         if (totalScore >= 400) {
-            // Останавливаем horror музыку, включаем только Christmas
             if (horrorMusic) {
                 horrorMusic.pause();
             }
             if (backgroundMusic) {
-                backgroundMusic.volume = 0.27; // Возвращаем нормальную громкость (уменьшено на 10%)
+                backgroundMusic.volume = 0.27;
                 if (backgroundMusic.paused) {
                     backgroundMusic.play();
                 }
             }
-            
+
             showPage('final-page');
-            // Добавляем снежинки на финальную страницу
             const snowflakesContainer = document.querySelector('.snowflakes-final');
             if (snowflakesContainer) {
-                createSnowflakes(snowflakesContainer, 8);
+                snowflakesContainer.innerHTML = '';
+                createSnowflakes(snowflakesContainer, 20);
             }
-            
-            // Инициализируем кнопку подарка
+
             initGiftButton();
         } else {
-            // Если очков недостаточно, возвращаем на главную
             resetToStart();
         }
     } else {
-        alert('Пожалуйста, ответь на вопрос!');
+        alert('Пожалуйста, ответь на вопрос, сталкер!');
     }
 }
 
@@ -623,22 +618,20 @@ function handleSantaAnswer() {
 function initGiftButton() {
     const giftButton = document.getElementById('get-gift-btn');
     if (!giftButton) return;
-    
+
     giftButtonEscapes = 0;
     giftButton.style.position = 'relative';
     giftButton.style.transition = 'none';
-    
-    // Удаляем старые обработчики если они есть
+
     const newButton = giftButton.cloneNode(true);
     giftButton.parentNode.replaceChild(newButton, giftButton);
-    
-    // Добавляем обработчики на новую кнопку
+
     newButton.addEventListener('click', handleGiftButtonClick);
     newButton.addEventListener('mouseenter', handleGiftButtonHover);
     newButton.addEventListener('touchstart', handleGiftButtonTouch, { passive: false });
 }
 
-// Обработка наведения на кнопку (для десктопа)
+// Обработка наведения на кнопку
 function handleGiftButtonHover(e) {
     if (giftButtonEscapes < 5) {
         e.preventDefault();
@@ -646,7 +639,7 @@ function handleGiftButtonHover(e) {
     }
 }
 
-// Обработка касания кнопки (для мобильных)
+// Обработка касания кнопки
 function handleGiftButtonTouch(e) {
     if (giftButtonEscapes < 5) {
         e.preventDefault();
@@ -657,30 +650,26 @@ function handleGiftButtonTouch(e) {
 // Убегание кнопки
 function escapeButton(button) {
     if (giftButtonEscapes >= 5) return;
-    
+
     giftButtonEscapes++;
-    
-    // Получаем размеры контейнера
+
     const giftBox = button.closest('.gift-box');
     const container = giftBox || document.querySelector('.final-content') || document.querySelector('.final-container');
     const containerRect = container ? container.getBoundingClientRect() : { width: window.innerWidth, height: window.innerHeight };
     const buttonRect = button.getBoundingClientRect();
-    
-    // Случайная позиция в пределах контейнера
+
     const maxX = Math.max(0, containerRect.width - buttonRect.width - 20);
     const maxY = Math.max(0, containerRect.height - buttonRect.height - 20);
-    
+
     const newX = Math.max(0, Math.random() * maxX);
     const newY = Math.max(0, Math.random() * maxY);
-    
-    // Плавное перемещение
+
     button.style.transition = 'all 0.3s ease';
     button.style.position = 'absolute';
     button.style.left = newX + 'px';
     button.style.top = newY + 'px';
     button.style.zIndex = '1000';
-    
-    // После 5 побегов кнопка останавливается
+
     if (giftButtonEscapes >= 5) {
         setTimeout(() => {
             button.style.transition = 'all 0.5s ease';
@@ -706,34 +695,34 @@ function handleGiftButtonClick(e) {
         e.target.disabled = true;
         e.target.style.opacity = '0.7';
         e.target.style.cursor = 'not-allowed';
-        // Здесь можно добавить логику получения подарка
+        playCorrectSound();
     }
 }
 
-// Звуковые эффекты
+// ========== ЗВУКОВЫЕ ЭФФЕКТЫ ==========
+
 function playCrackSound() {
     const ctx = initAudioContext();
     if (!ctx) return;
-    
+
     try {
-        // Возобновляем контекст если он приостановлен
         if (ctx.state === 'suspended') {
             ctx.resume();
         }
-        
+
         const oscillator = ctx.createOscillator();
         const gainNode = ctx.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(ctx.destination);
-        
+
         oscillator.type = 'sawtooth';
         oscillator.frequency.setValueAtTime(200, ctx.currentTime);
         oscillator.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.1);
-        
-        gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
+
+        gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
-        
+
         oscillator.start(ctx.currentTime);
         oscillator.stop(ctx.currentTime + 0.1);
     } catch (e) {
@@ -744,40 +733,36 @@ function playCrackSound() {
 function playScrimerSound() {
     const ctx = initAudioContext();
     if (!ctx) return;
-    
+
     try {
-        // Возобновляем контекст если он приостановлен
         if (ctx.state === 'suspended') {
             ctx.resume();
         }
-        
-        // Страшный звук - комбинация низких и высоких частот
+
         const oscillator1 = ctx.createOscillator();
         const oscillator2 = ctx.createOscillator();
         const gainNode = ctx.createGain();
         const gainNode2 = ctx.createGain();
-        
+
         oscillator1.connect(gainNode);
         oscillator2.connect(gainNode2);
         gainNode.connect(ctx.destination);
         gainNode2.connect(ctx.destination);
-        
-        // Низкий страшный звук
+
         oscillator1.type = 'sawtooth';
         oscillator1.frequency.setValueAtTime(80, ctx.currentTime);
         oscillator1.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.5);
-        
-        // Высокий резкий звук
+
         oscillator2.type = 'square';
         oscillator2.frequency.setValueAtTime(800, ctx.currentTime);
         oscillator2.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.3);
-        
+
         gainNode.gain.setValueAtTime(0.4, ctx.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-        
+
         gainNode2.gain.setValueAtTime(0.2, ctx.currentTime);
         gainNode2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-        
+
         oscillator1.start(ctx.currentTime);
         oscillator2.start(ctx.currentTime);
         oscillator1.stop(ctx.currentTime + 0.5);
@@ -790,26 +775,26 @@ function playScrimerSound() {
 function playCorrectSound() {
     const ctx = initAudioContext();
     if (!ctx) return;
-    
+
     try {
         if (ctx.state === 'suspended') {
             ctx.resume();
         }
-        
+
         const oscillator = ctx.createOscillator();
         const gainNode = ctx.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(ctx.destination);
-        
+
         oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
-        oscillator.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
-        oscillator.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2); // G5
-        
+        oscillator.frequency.setValueAtTime(523.25, ctx.currentTime);
+        oscillator.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+        oscillator.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2);
+
         gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-        
+
         oscillator.start(ctx.currentTime);
         oscillator.stop(ctx.currentTime + 0.3);
     } catch (e) {
@@ -820,25 +805,25 @@ function playCorrectSound() {
 function playIncorrectSound() {
     const ctx = initAudioContext();
     if (!ctx) return;
-    
+
     try {
         if (ctx.state === 'suspended') {
             ctx.resume();
         }
-        
+
         const oscillator = ctx.createOscillator();
         const gainNode = ctx.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(ctx.destination);
-        
+
         oscillator.type = 'sawtooth';
         oscillator.frequency.setValueAtTime(200, ctx.currentTime);
         oscillator.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.2);
-        
+
         gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
-        
+
         oscillator.start(ctx.currentTime);
         oscillator.stop(ctx.currentTime + 0.2);
     } catch (e) {
@@ -849,25 +834,25 @@ function playIncorrectSound() {
 function playHitSound() {
     const ctx = initAudioContext();
     if (!ctx) return;
-    
+
     try {
         if (ctx.state === 'suspended') {
             ctx.resume();
         }
-        
+
         const oscillator = ctx.createOscillator();
         const gainNode = ctx.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(ctx.destination);
-        
+
         oscillator.type = 'square';
         oscillator.frequency.setValueAtTime(300, ctx.currentTime);
         oscillator.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.1);
-        
+
         gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
-        
+
         oscillator.start(ctx.currentTime);
         oscillator.stop(ctx.currentTime + 0.1);
     } catch (e) {
@@ -878,28 +863,27 @@ function playHitSound() {
 function playSnowflakeSound() {
     const ctx = initAudioContext();
     if (!ctx) return;
-    
+
     try {
-        // Возобновляем контекст если он приостановлен
         if (ctx.state === 'suspended') {
             ctx.resume();
         }
-        
+
         const oscillator = ctx.createOscillator();
         const gainNode = ctx.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(ctx.destination);
-        
+
         oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(800, ctx.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.05);
-        
-        gainNode.gain.setValueAtTime(0.05, ctx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
-        
+        oscillator.frequency.setValueAtTime(1200, ctx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.08);
+
+        gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+
         oscillator.start(ctx.currentTime);
-        oscillator.stop(ctx.currentTime + 0.05);
+        oscillator.stop(ctx.currentTime + 0.08);
     } catch (e) {
         // Игнорируем ошибки звука
     }
