@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Консольные команды для тестирования
 window.skipToScrimer = function () {
-    console.log('🎃 Переход к скримеру...');
+    console.log('[DEBUG] Переход к скримеру...');
     if (crackInterval) clearInterval(crackInterval);
     if (snowflakeInterval) clearInterval(snowflakeInterval);
     totalScore = 500;
@@ -114,7 +114,7 @@ window.skipToScrimer = function () {
 };
 
 window.skipToFinal = function () {
-    console.log('🎄 Переход к финалу...');
+    console.log('[DEBUG] Переход к финалу...');
     totalScore = 500;
     showPage('final-page');
     const snowflakesContainer = document.querySelector('.snowflakes-final');
@@ -125,7 +125,7 @@ window.skipToFinal = function () {
     initGiftButton();
 };
 
-console.log('🎮 Доступные команды: skipToScrimer(), skipToFinal()');
+console.log('[DEBUG] Доступные команды: skipToScrimer(), skipToFinal()');
 
 // Инициализация фоновой музыки
 function initBackgroundMusic() {
@@ -173,7 +173,7 @@ function initMainPage() {
 
 // Создание снежинок с улучшенными эффектами
 function createSnowflakes(container, count) {
-    const symbols = ['❄', '❅', '❆', '✻', '✼', '❉'];
+    const symbols = ['*', '+', '·', '×', '°', '•'];
     for (let i = 0; i < count; i++) {
         const snowflake = document.createElement('div');
         snowflake.className = 'snowflake';
@@ -279,11 +279,11 @@ function showQuizResult() {
 
     if (resultTitle) {
         if (correctAnswers >= 8) {
-            resultTitle.textContent = "Отличный результат! 🎯";
+            resultTitle.textContent = "Отличный результат!";
         } else if (correctAnswers >= 5) {
-            resultTitle.textContent = "Неплохо, сталкер! 👍";
+            resultTitle.textContent = "Неплохо, сталкер!";
         } else {
-            resultTitle.textContent = "Нужно больше практики... 📚";
+            resultTitle.textContent = "Нужно больше практики...";
         }
     }
 
@@ -299,44 +299,55 @@ function startCracksPages() {
     showCrackPage();
 }
 
-// Обновление счетчика снежинок
+// Обновление счетчика снежинок (скрыто)
 function updateSnowflakeCounter() {
-    const counter = document.getElementById('snowflake-counter');
-    if (counter) {
-        counter.textContent = `❄ ${collectedSnowflakes} / ${neededSnowflakes}`;
-    }
+    // Счетчик теперь скрыт, но логика остается
 }
 
-// Показать страницу с трещинами
+// Переменные для хоррор эффектов
+let flashlightOverlay = null;
+let flashlightCursor = null;
+let horrorFlashInterval = null;
+let creepySoundInterval = null;
+
+// Показать страницу с трещинами - ХОРРОР РЕЖИМ
 function showCrackPage() {
     showPage('cracks-pages');
 
     const container = document.getElementById('interactive-snowflakes');
     const cracksOverlay = document.getElementById('cracks-overlay');
+    const cracksPage = document.getElementById('cracks-pages');
     container.innerHTML = '';
     cracksOverlay.innerHTML = '';
     cracksOverlay.classList.remove('active');
     collectedSnowflakes = 0;
     activeSnowflakes = 0;
 
-    if (snowflakeInterval) {
-        clearInterval(snowflakeInterval);
-    }
-    if (crackInterval) {
-        clearInterval(crackInterval);
-    }
+    if (snowflakeInterval) clearInterval(snowflakeInterval);
+    if (crackInterval) clearInterval(crackInterval);
+    if (horrorFlashInterval) clearInterval(horrorFlashInterval);
+    if (creepySoundInterval) clearInterval(creepySoundInterval);
 
+    // Создаём элементы фонарика
+    createFlashlightEffect(cracksPage);
+
+    // Добавляем статический шум
+    const staticNoise = document.createElement('div');
+    staticNoise.className = 'static-noise';
+    cracksPage.appendChild(staticNoise);
+
+    // Не показываем сколько нужно собрать - тайна!
     neededSnowflakes = 5 + 2 * currentCrackPage;
-    updateSnowflakeCounter();
 
-    const baseSpeed = 4000;
-    snowflakeSpeed = Math.max(3000, baseSpeed + currentCrackPage * 250);
+    // Замедленные, загадочные снежинки
+    const baseSpeed = 5000;
+    snowflakeSpeed = Math.max(4000, baseSpeed + currentCrackPage * 300);
 
-    const spawnInterval = Math.max(800, 1800 - currentCrackPage * 100);
+    const spawnInterval = Math.max(1200, 2500 - currentCrackPage * 150);
 
-    const initialCount = 6;
-    for (let i = 0; i < initialCount; i++) {
-        setTimeout(() => createSingleSnowflake(container), i * 200);
+    // Начальные снежинки с задержкой
+    for (let i = 0; i < 4; i++) {
+        setTimeout(() => createSingleSnowflake(container), 1500 + i * 400);
     }
 
     snowflakeInterval = setInterval(() => {
@@ -345,8 +356,147 @@ function showCrackPage() {
         }
     }, spawnInterval);
 
+    // Трещины появляются реже и загадочнее
     startGradualCracks(cracksOverlay);
+
+    // Случайные вспышки
+    startHorrorFlashes(cracksPage);
+
+    // Жуткие звуки
+    startCreepySounds();
+
     updateMusicForCracksPage();
+}
+
+// Создание эффекта фонарика
+function createFlashlightEffect(page) {
+    // Удаляем старые элементы
+    if (flashlightOverlay) flashlightOverlay.remove();
+    if (flashlightCursor) flashlightCursor.remove();
+
+    // Создаём наложение темноты
+    flashlightOverlay = document.createElement('div');
+    flashlightOverlay.className = 'flashlight-overlay';
+    page.appendChild(flashlightOverlay);
+
+    // Создаём курсор
+    flashlightCursor = document.createElement('div');
+    flashlightCursor.className = 'flashlight-cursor';
+    page.appendChild(flashlightCursor);
+
+    // Следим за мышью
+    page.addEventListener('mousemove', handleFlashlightMove);
+    page.addEventListener('touchmove', handleFlashlightTouch, { passive: false });
+}
+
+// Обработка движения мыши
+function handleFlashlightMove(e) {
+    const x = e.clientX;
+    const y = e.clientY;
+
+    if (flashlightOverlay) {
+        flashlightOverlay.style.setProperty('--mouse-x', x + 'px');
+        flashlightOverlay.style.setProperty('--mouse-y', y + 'px');
+    }
+
+    if (flashlightCursor) {
+        flashlightCursor.style.left = x + 'px';
+        flashlightCursor.style.top = y + 'px';
+    }
+}
+
+// Обработка тача
+function handleFlashlightTouch(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    handleFlashlightMove({ clientX: touch.clientX, clientY: touch.clientY });
+}
+
+// Случайные вспышки ужаса
+function startHorrorFlashes(page) {
+    if (horrorFlashInterval) clearInterval(horrorFlashInterval);
+
+    const createFlash = () => {
+        const flash = document.createElement('div');
+        flash.className = 'horror-flash';
+        page.appendChild(flash);
+
+        setTimeout(() => flash.remove(), 150);
+    };
+
+    // Случайные вспышки
+    horrorFlashInterval = setInterval(() => {
+        if (Math.random() < 0.3) { // 30% шанс
+            createFlash();
+            playCreepySound();
+        }
+    }, 3000 + Math.random() * 4000);
+}
+
+// Жуткие звуки
+function startCreepySounds() {
+    if (creepySoundInterval) clearInterval(creepySoundInterval);
+
+    creepySoundInterval = setInterval(() => {
+        if (Math.random() < 0.25) {
+            playCreepySound();
+        }
+    }, 5000 + Math.random() * 8000);
+}
+
+// Жуткий звук
+function playCreepySound() {
+    const ctx = initAudioContext();
+    if (!ctx) return;
+
+    try {
+        if (ctx.state === 'suspended') ctx.resume();
+
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+
+        oscillator.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(ctx.destination);
+
+        // Случайный тип звука
+        const soundType = Math.floor(Math.random() * 3);
+
+        if (soundType === 0) {
+            // Низкий гул
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(40 + Math.random() * 30, ctx.currentTime);
+            filter.type = 'lowpass';
+            filter.frequency.value = 200;
+            gainNode.gain.setValueAtTime(0.06, ctx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.5);
+            oscillator.start(ctx.currentTime);
+            oscillator.stop(ctx.currentTime + 1.5);
+        } else if (soundType === 1) {
+            // Шёпот
+            oscillator.type = 'sawtooth';
+            oscillator.frequency.setValueAtTime(80, ctx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(20, ctx.currentTime + 0.5);
+            filter.type = 'bandpass';
+            filter.frequency.value = 500;
+            gainNode.gain.setValueAtTime(0.03, ctx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+            oscillator.start(ctx.currentTime);
+            oscillator.stop(ctx.currentTime + 0.5);
+        } else {
+            // Скрип
+            oscillator.type = 'square';
+            oscillator.frequency.setValueAtTime(2000 + Math.random() * 1000, ctx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.15);
+            filter.type = 'highpass';
+            filter.frequency.value = 1000;
+            gainNode.gain.setValueAtTime(0.015, ctx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+            oscillator.start(ctx.currentTime);
+            oscillator.stop(ctx.currentTime + 0.15);
+        }
+    } catch (e) { }
 }
 
 // Обновление музыки для страниц с трещинами
@@ -359,6 +509,41 @@ function updateMusicForCracksPage() {
     christmasVolume = Math.max(0, christmasVolume - 0.05);
     if (backgroundMusic) {
         backgroundMusic.volume = christmasVolume;
+    }
+}
+
+// Очистка хоррор эффектов
+function cleanupHorrorEffects() {
+    const cracksPage = document.getElementById('cracks-pages');
+
+    if (flashlightOverlay) {
+        flashlightOverlay.remove();
+        flashlightOverlay = null;
+    }
+    if (flashlightCursor) {
+        flashlightCursor.remove();
+        flashlightCursor = null;
+    }
+    if (horrorFlashInterval) {
+        clearInterval(horrorFlashInterval);
+        horrorFlashInterval = null;
+    }
+    if (creepySoundInterval) {
+        clearInterval(creepySoundInterval);
+        creepySoundInterval = null;
+    }
+    if (suddenCrackTimeout) {
+        clearTimeout(suddenCrackTimeout);
+        suddenCrackTimeout = null;
+    }
+
+    // Удаляем статический шум
+    if (cracksPage) {
+        const staticNoise = cracksPage.querySelector('.static-noise');
+        if (staticNoise) staticNoise.remove();
+
+        cracksPage.removeEventListener('mousemove', handleFlashlightMove);
+        cracksPage.removeEventListener('touchmove', handleFlashlightTouch);
     }
 }
 
@@ -585,6 +770,9 @@ let scrimerCrackInterval = null;
 
 // Показать скример
 function showScrimer() {
+    // Очищаем хоррор эффекты
+    cleanupHorrorEffects();
+
     showPage('scrimer-page');
     scrimerHits = 0;
     const hitCountElement = document.getElementById('scrimer-hit-count');
