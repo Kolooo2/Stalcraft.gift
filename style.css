@@ -1,0 +1,700 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.page {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.page.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Главная страница */
+#main-page {
+    background: #000;
+    color: #fff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.snowflakes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: #fff;
+    font-size: 1em;
+    font-family: Arial;
+    text-shadow: 0 0 5px #fff;
+    animation: fall linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+.content {
+    text-align: center;
+    z-index: 10;
+}
+
+.main-title {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+    to {
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.5);
+    }
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Викторина */
+#quiz-page {
+    background: #fff;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.quiz-container {
+    max-width: 800px;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.quiz-header h2 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.quiz-progress {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.question-container {
+    margin-top: 30px;
+}
+
+#question-text {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.answer-btn {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.answer-btn:hover {
+    border-color: #667eea;
+    background: #f5f5f5;
+    transform: translateX(5px);
+}
+
+.answer-btn.correct {
+    background: #4caf50;
+    color: white;
+    border-color: #4caf50;
+    animation: correctPulse 0.5s ease;
+}
+
+.answer-btn.incorrect {
+    background: #f44336;
+    color: white;
+    border-color: #f44336;
+    animation: incorrectShake 0.5s ease;
+}
+
+@keyframes correctPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes incorrectShake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+/* Страницы с трещинами */
+#cracks-pages {
+    background: #000;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.snowflakes-interactive {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.snowflake-interactive {
+    position: absolute;
+    top: -10px;
+    color: #fff;
+    font-size: 1.2em;
+    font-family: Arial;
+    text-shadow: 0 0 5px #fff;
+    animation: fallInteractive linear infinite;
+    opacity: 0.9;
+    cursor: pointer;
+    pointer-events: auto;
+    user-select: none;
+    transition: transform 0.2s ease;
+}
+
+.snowflake-interactive:hover {
+    transform: scale(1.2);
+}
+
+.snowflake-interactive.broken {
+    animation: breakSnowflake 0.5s ease forwards;
+    pointer-events: none;
+}
+
+@keyframes fallInteractive {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+@keyframes breakSnowflake {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+.cracks-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.cracks-overlay.active {
+    opacity: 1;
+}
+
+.crack {
+    position: absolute;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.1) 20%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        rgba(255, 255, 255, 0.1) 80%, 
+        transparent 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: crackAppear 2s ease forwards;
+}
+
+@keyframes crackAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.cracks-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+    font-size: 1.5rem;
+    display: none; /* Скрываем текст в центре */
+}
+
+
+/* Страница результатов викторины */
+#quiz-result-page {
+    background: #000;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.quiz-result-content {
+    text-align: center;
+}
+
+.quiz-result-title {
+    font-size: 4rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.quiz-result-score {
+    font-size: 3rem;
+    opacity: 0.8;
+}
+
+/* Страница с очками */
+#score-page {
+    background: #000;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.score-content {
+    text-align: center;
+}
+
+.score-title {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.score-amount {
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+    color: #4caf50;
+}
+
+.score-requirement {
+    font-size: 1.5rem;
+    opacity: 0.7;
+}
+
+/* Скример */
+#scrimer-page {
+    background: #000;
+    justify-content: center;
+    align-items: center;
+}
+
+#scrimer-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: scrimerAppear 0.2s ease;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    user-select: none;
+}
+
+.scrimer-hits {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+    font-size: 1.5rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes scrimerAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Страница с Дедом Морозом */
+#santa-page {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.santa-container {
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+}
+
+.santa-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.santa-question {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+#behavior-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    resize: vertical;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+}
+
+#behavior-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#behavior-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Финальная страница */
+#final-page {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 20s ease infinite;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    position: relative;
+}
+
+.snowflakes-final {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.final-container {
+    max-width: 800px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+.final-content {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.final-title {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.poem {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.poem p {
+    margin-bottom: 10px;
+}
+
+.gift-box {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    min-height: 200px;
+}
+
+.gift-box h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.gift-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+.btn-gift {
+    padding: 15px 40px;
+    font-size: 1.3rem;
+    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 10;
+}
+
+.btn-gift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+}
+
+.btn-gift:active {
+    transform: translateY(0);
+}
+
+.btn-gift:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.joke {
+    font-size: 1.1rem;
+    font-style: italic;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .quiz-container {
+        padding: 20px;
+    }
+    
+    #question-text {
+        font-size: 1.2rem;
+    }
+    
+    .answer-btn {
+        font-size: 1rem;
+        padding: 12px 15px;
+    }
+    
+    .final-title {
+        font-size: 2rem;
+    }
+    
+    .poem {
+        font-size: 1.1rem;
+    }
+    
+    .gift-amount {
+        font-size: 2rem;
+    }
+    
+    .btn-gift {
+        font-size: 1.1rem;
+        padding: 12px 30px;
+    }
+    
+    .gift-box {
+        min-height: 150px;
+    }
+    
+    .santa-content h2 {
+        font-size: 2rem;
+    }
+    
+    .santa-question {
+        font-size: 1.2rem;
+    }
+    
+    .quiz-result-title {
+        font-size: 2.5rem;
+    }
+    
+    .quiz-result-score {
+        font-size: 2rem;
+    }
+    
+    .scrimer-hits {
+        font-size: 1.2rem;
+        padding: 8px 15px;
+    }
+    
+    .score-title {
+        font-size: 2.5rem;
+    }
+    
+    .score-amount {
+        font-size: 3.5rem;
+    }
+    
+    .score-requirement {
+        font-size: 1.2rem;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+    
+    .quiz-container {
+        padding: 15px;
+    }
+    
+    .final-content {
+        padding: 25px;
+    }
+}
