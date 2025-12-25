@@ -104,6 +104,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { once: true });
 });
 
+// Консольные команды для тестирования
+window.skipToScrimer = function () {
+    console.log('🎃 Переход к скримеру...');
+    if (crackInterval) clearInterval(crackInterval);
+    if (snowflakeInterval) clearInterval(snowflakeInterval);
+    totalScore = 500;
+    showScrimer();
+};
+
+window.skipToFinal = function () {
+    console.log('🎄 Переход к финалу...');
+    totalScore = 500;
+    showPage('final-page');
+    const snowflakesContainer = document.querySelector('.snowflakes-final');
+    if (snowflakesContainer) {
+        snowflakesContainer.innerHTML = '';
+        createSnowflakes(snowflakesContainer, 20);
+    }
+    initGiftButton();
+};
+
+console.log('🎮 Доступные команды: skipToScrimer(), skipToFinal()');
+
 // Инициализация фоновой музыки
 function initBackgroundMusic() {
     backgroundMusic = document.getElementById('background-music');
@@ -339,10 +362,65 @@ function updateMusicForCracksPage() {
     }
 }
 
+// Внезапный взрыв трещин (без вспышки, замедленный)
+let suddenCrackTimeout = null;
+
+function triggerSuddenCrackBurst(container) {
+    const burstCount = 10 + Math.floor(Math.random() * 8); // 10-18 трещин (меньше)
+
+    // Создаём трещины постепенно (замедленно)
+    for (let i = 0; i < burstCount; i++) {
+        setTimeout(() => createSingleCrack(container), i * 80); // 80ms вместо 20ms
+    }
+
+    // Тихий звук
+    playSuddenCrackSound();
+}
+
+function scheduleSuddenCracks(container) {
+    // Увеличенный интервал 5-12 секунд
+    const delay = 5000 + Math.random() * 7000;
+
+    suddenCrackTimeout = setTimeout(() => {
+        triggerSuddenCrackBurst(container);
+        // Планируем следующий взрыв
+        scheduleSuddenCracks(container);
+    }, delay);
+}
+
+function playSuddenCrackSound() {
+    const ctx = initAudioContext();
+    if (!ctx) return;
+
+    try {
+        if (ctx.state === 'suspended') ctx.resume();
+
+        // Резкий громкий треск
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(ctx.destination);
+
+        oscillator.type = 'sawtooth';
+        oscillator.frequency.setValueAtTime(150, ctx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.15);
+
+        gainNode.gain.setValueAtTime(0.25, ctx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+
+        oscillator.start(ctx.currentTime);
+        oscillator.stop(ctx.currentTime + 0.15);
+    } catch (e) { }
+}
+
 // Постепенное появление трещин
 function startGradualCracks(container) {
     if (crackInterval) {
         clearInterval(crackInterval);
+    }
+    if (suddenCrackTimeout) {
+        clearTimeout(suddenCrackTimeout);
     }
 
     const baseCracks = 50;
@@ -350,6 +428,9 @@ function startGradualCracks(container) {
     const totalCracks = baseCracks + currentCrackPage * cracksPerPage;
 
     let cracksCreated = 0;
+
+    // Запускаем внезапные взрывы трещин
+    scheduleSuddenCracks(container);
 
     crackInterval = setInterval(() => {
         if (cracksCreated < totalCracks) {
@@ -446,13 +527,93 @@ function createSingleCrack(container) {
     playCrackSound();
 }
 
+// Создание реалистичной трещины стекла на скримере
+function createScrimerCrack(container, x, y) {
+    const crack = document.createElement('div');
+    crack.className = 'scrimer-crack';
+
+    // Случайная позиция если не указана
+    const posX = x !== undefined ? x : Math.random() * 100;
+    const posY = y !== undefined ? y : Math.random() * 100;
+
+    // Случайные параметры трещины
+    const length = 80 + Math.random() * 180;
+    const angle = Math.random() * 360;
+    const branchAngle = 20 + Math.random() * 40;
+
+    crack.style.left = posX + '%';
+    crack.style.top = posY + '%';
+    crack.style.setProperty('--crack-length', length + 'px');
+    crack.style.setProperty('--crack-angle', angle + 'deg');
+    crack.style.setProperty('--branch-angle', branchAngle + 'deg');
+
+    container.appendChild(crack);
+}
+
+// Создание точки удара с расходящимися трещинами
+function createImpactPoint(container, x, y) {
+    // Точка удара
+    const impact = document.createElement('div');
+    impact.className = 'crack-impact';
+    impact.style.left = x + '%';
+    impact.style.top = y + '%';
+    container.appendChild(impact);
+
+    // Расходящиеся трещины от точки удара (5-8 штук)
+    const crackCount = 5 + Math.floor(Math.random() * 4);
+    for (let i = 0; i < crackCount; i++) {
+        setTimeout(() => {
+            const crack = document.createElement('div');
+            crack.className = 'scrimer-crack';
+
+            const length = 60 + Math.random() * 150;
+            const angle = (360 / crackCount) * i + (Math.random() - 0.5) * 30;
+            const branchAngle = 25 + Math.random() * 35;
+
+            crack.style.left = x + '%';
+            crack.style.top = y + '%';
+            crack.style.setProperty('--crack-length', length + 'px');
+            crack.style.setProperty('--crack-angle', angle + 'deg');
+            crack.style.setProperty('--branch-angle', branchAngle + 'deg');
+
+            container.appendChild(crack);
+        }, i * 30);
+    }
+}
+
+let scrimerCrackInterval = null;
+
 // Показать скример
 function showScrimer() {
     showPage('scrimer-page');
     scrimerHits = 0;
     const hitCountElement = document.getElementById('scrimer-hit-count');
+    const scrimerCracksContainer = document.getElementById('scrimer-cracks');
+
     if (hitCountElement) {
         hitCountElement.textContent = scrimerHits;
+    }
+
+    // Очищаем предыдущие трещины
+    if (scrimerCracksContainer) {
+        scrimerCracksContainer.innerHTML = '';
+    }
+
+    // Останавливаем предыдущий интервал
+    if (scrimerCrackInterval) {
+        clearInterval(scrimerCrackInterval);
+    }
+
+    // Начальные трещины при появлении скримера
+    if (scrimerCracksContainer) {
+        for (let i = 0; i < 8; i++) {
+            setTimeout(() => createScrimerCrack(scrimerCracksContainer), i * 50);
+        }
+
+        // Периодические трещины для атмосферы
+        scrimerCrackInterval = setInterval(() => {
+            createScrimerCrack(scrimerCracksContainer);
+        }, 800);
     }
 
     if (backgroundMusic) {
@@ -483,6 +644,14 @@ function showScrimer() {
             hitCountElement.textContent = scrimerHits;
         }
 
+        // Создаём точку удара с трещинами в месте клика
+        if (scrimerCracksContainer) {
+            const rect = scrimerPage.getBoundingClientRect();
+            const clickX = ((e.clientX - rect.left) / rect.width) * 100;
+            const clickY = ((e.clientY - rect.top) / rect.height) * 100;
+            createImpactPoint(scrimerCracksContainer, clickX, clickY);
+        }
+
         if (scrimerImage) {
             scrimerImage.style.transform = 'scale(0.95)';
             setTimeout(() => {
@@ -500,6 +669,9 @@ function showScrimer() {
             }
             if (timeoutId) {
                 clearTimeout(timeoutId);
+            }
+            if (scrimerCrackInterval) {
+                clearInterval(scrimerCrackInterval);
             }
             if (scrimerMusic) {
                 scrimerMusic.pause();

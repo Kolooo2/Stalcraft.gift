@@ -47,7 +47,7 @@ body {
 
 /* ========== ГЛАВНАЯ СТРАНИЦА ========== */
 #main-page {
-    background: 
+    background:
         radial-gradient(ellipse at 20% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
         radial-gradient(ellipse at 80% 80%, rgba(255, 107, 0, 0.05) 0%, transparent 50%),
         linear-gradient(180deg, var(--stalcraft-darker) 0%, var(--stalcraft-dark) 50%, #0d1117 100%);
@@ -67,7 +67,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
+    background-image:
         linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
@@ -82,7 +82,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%);
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.7) 100%);
     pointer-events: none;
 }
 
@@ -102,7 +102,7 @@ body {
     top: -50px;
     color: var(--frost-white);
     font-size: 1.8em;
-    text-shadow: 
+    text-shadow:
         0 0 10px var(--frost-blue),
         0 0 20px var(--frost-blue),
         0 0 30px rgba(0, 212, 255, 0.5);
@@ -115,9 +115,11 @@ body {
     0% {
         transform: translateY(0) rotate(0deg) translateX(0);
     }
+
     50% {
         transform: translateY(50vh) rotate(180deg) translateX(20px);
     }
+
     100% {
         transform: translateY(100vh) rotate(360deg) translateX(-20px);
     }
@@ -140,23 +142,26 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 60px;
-    box-shadow: 
+    box-shadow:
         0 0 30px var(--glow-orange),
         0 0 60px rgba(255, 107, 0, 0.3),
-        inset 0 0 30px rgba(0,0,0,0.3);
+        inset 0 0 30px rgba(0, 0, 0, 0.3);
     animation: emblemPulse 3s ease-in-out infinite;
-    border: 3px solid rgba(255,255,255,0.2);
+    border: 3px solid rgba(255, 255, 255, 0.2);
 }
 
 @keyframes emblemPulse {
-    0%, 100% {
-        box-shadow: 
+
+    0%,
+    100% {
+        box-shadow:
             0 0 30px var(--glow-orange),
             0 0 60px rgba(255, 107, 0, 0.3);
         transform: scale(1);
     }
+
     50% {
-        box-shadow: 
+        box-shadow:
             0 0 50px var(--glow-orange),
             0 0 100px rgba(255, 107, 0, 0.5);
         transform: scale(1.05);
@@ -178,8 +183,13 @@ body {
 }
 
 @keyframes shimmer {
-    0% { background-position: 200% 50%; }
-    100% { background-position: -200% 50%; }
+    0% {
+        background-position: 200% 50%;
+    }
+
+    100% {
+        background-position: -200% 50%;
+    }
 }
 
 .stalcraft-badge {
@@ -197,8 +207,15 @@ body {
 }
 
 @keyframes badgePulse {
-    0%, 100% { box-shadow: 0 0 20px var(--glow-orange); }
-    50% { box-shadow: 0 0 40px var(--glow-orange), 0 0 60px rgba(255, 107, 0, 0.3); }
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px var(--glow-orange);
+    }
+
+    50% {
+        box-shadow: 0 0 40px var(--glow-orange), 0 0 60px rgba(255, 107, 0, 0.3);
+    }
 }
 
 .subtitle {
@@ -233,9 +250,9 @@ body {
     background: linear-gradient(135deg, var(--stalcraft-orange) 0%, #ff8533 50%, var(--stalcraft-orange) 100%);
     background-size: 200% 200%;
     color: #000;
-    box-shadow: 
+    box-shadow:
         0 4px 20px var(--glow-orange),
-        inset 0 1px 0 rgba(255,255,255,0.3);
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     border: 2px solid rgba(255, 215, 0, 0.3);
 }
 
@@ -246,7 +263,7 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transition: left 0.5s;
 }
 
@@ -256,7 +273,7 @@ body {
 
 .btn-primary:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 
+    box-shadow:
         0 8px 30px var(--glow-orange),
         0 0 50px rgba(255, 107, 0, 0.4);
     background-position: 100% 50%;
@@ -287,13 +304,18 @@ body {
 }
 
 @keyframes slowRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* ========== ВИКТОРИНА ========== */
 #quiz-page {
-    background: 
+    background:
         radial-gradient(ellipse at top, rgba(255, 107, 0, 0.1) 0%, transparent 50%),
         linear-gradient(180deg, var(--stalcraft-darker) 0%, var(--stalcraft-dark) 100%);
     justify-content: center;
@@ -310,7 +332,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
+    background-image:
         linear-gradient(rgba(255, 107, 0, 0.02) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 107, 0, 0.02) 1px, transparent 1px);
     background-size: 30px 30px;
@@ -323,10 +345,10 @@ body {
     background: linear-gradient(135deg, rgba(26, 26, 36, 0.95) 0%, rgba(42, 42, 58, 0.95) 100%);
     border-radius: 20px;
     padding: 40px;
-    box-shadow: 
+    box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.5),
         0 0 40px rgba(255, 107, 0, 0.1),
-        inset 0 1px 0 rgba(255,255,255,0.1);
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 107, 0, 0.2);
     backdrop-filter: blur(10px);
     position: relative;
@@ -487,21 +509,44 @@ body {
 }
 
 @keyframes correctPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.03); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
 }
 
 @keyframes incorrectShake {
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-10px); }
-    40% { transform: translateX(10px); }
-    60% { transform: translateX(-10px); }
-    80% { transform: translateX(10px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-10px);
+    }
+
+    40% {
+        transform: translateX(10px);
+    }
+
+    60% {
+        transform: translateX(-10px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
 }
 
 /* ========== СТРАНИЦА РЕЗУЛЬТАТОВ ========== */
 #quiz-result-page {
-    background: 
+    background:
         radial-gradient(ellipse at center, rgba(255, 107, 0, 0.1) 0%, transparent 60%),
         linear-gradient(180deg, var(--stalcraft-darker) 0%, var(--stalcraft-dark) 100%);
     justify-content: center;
@@ -524,8 +569,17 @@ body {
 }
 
 @keyframes resultPulse {
-    0%, 100% { text-shadow: 0 0 40px var(--glow-orange); transform: scale(1); }
-    50% { text-shadow: 0 0 60px var(--glow-orange), 0 0 80px rgba(255, 107, 0, 0.3); transform: scale(1.02); }
+
+    0%,
+    100% {
+        text-shadow: 0 0 40px var(--glow-orange);
+        transform: scale(1);
+    }
+
+    50% {
+        text-shadow: 0 0 60px var(--glow-orange), 0 0 80px rgba(255, 107, 0, 0.3);
+        transform: scale(1.02);
+    }
 }
 
 .quiz-result-score {
@@ -537,7 +591,7 @@ body {
 
 /* ========== СТРАНИЦЫ С ТРЕЩИНАМИ ========== */
 #cracks-pages {
-    background: 
+    background:
         radial-gradient(ellipse at center, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
         linear-gradient(180deg, #050510 0%, #0a0a18 100%);
     color: #fff;
@@ -560,7 +614,7 @@ body {
     top: -60px;
     color: var(--frost-white);
     font-size: 2.5em;
-    text-shadow: 
+    text-shadow:
         0 0 15px var(--frost-blue),
         0 0 30px var(--frost-blue),
         0 0 45px rgba(0, 212, 255, 0.6);
@@ -587,6 +641,7 @@ body {
     0% {
         transform: translateY(0) rotate(0deg);
     }
+
     100% {
         transform: translateY(110vh) rotate(720deg);
     }
@@ -598,10 +653,12 @@ body {
         opacity: 1;
         filter: drop-shadow(0 0 10px var(--frost-blue));
     }
+
     50% {
         transform: scale(1.5) rotate(90deg);
         filter: drop-shadow(0 0 40px var(--frost-blue)) brightness(2);
     }
+
     100% {
         transform: scale(0) rotate(180deg);
         opacity: 0;
@@ -627,12 +684,12 @@ body {
 
 .crack {
     position: absolute;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(255, 107, 0, 0.2) 20%, 
-        rgba(255, 215, 0, 0.4) 50%, 
-        rgba(255, 107, 0, 0.2) 80%, 
-        transparent 100%);
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 107, 0, 0.2) 20%,
+            rgba(255, 215, 0, 0.4) 50%,
+            rgba(255, 107, 0, 0.2) 80%,
+            transparent 100%);
     border: 1px solid rgba(255, 107, 0, 0.3);
     box-shadow: 0 0 15px var(--glow-orange);
     animation: crackAppear 1.5s ease forwards;
@@ -643,9 +700,11 @@ body {
         opacity: 0;
         transform: scaleX(0);
     }
+
     50% {
         opacity: 1;
     }
+
     100% {
         opacity: 0.8;
         transform: scaleX(1);
@@ -673,7 +732,7 @@ body {
 
 /* ========== СТРАНИЦА С ОЧКАМИ ========== */
 #score-page {
-    background: 
+    background:
         radial-gradient(ellipse at center, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
         linear-gradient(180deg, var(--stalcraft-darker) 0%, var(--stalcraft-dark) 100%);
     justify-content: center;
@@ -764,6 +823,7 @@ body {
         transform: scale(1.5);
         filter: brightness(3);
     }
+
     100% {
         opacity: 1;
         transform: scale(1);
@@ -771,9 +831,118 @@ body {
     }
 }
 
+/* Контейнер трещин на скримере */
+.scrimer-cracks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+/* Реалистичные трещины стекла */
+.scrimer-crack {
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Основная трещина */
+.scrimer-crack::before {
+    content: '';
+    position: absolute;
+    width: var(--crack-length, 150px);
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.9) 10%,
+            rgba(200, 200, 200, 1) 50%,
+            rgba(255, 255, 255, 0.9) 90%,
+            transparent 100%);
+    box-shadow:
+        0 0 2px rgba(255, 255, 255, 0.8),
+        0 1px 0 rgba(0, 0, 0, 0.3),
+        0 -1px 0 rgba(255, 255, 255, 0.2);
+    transform: rotate(var(--crack-angle, 0deg));
+    transform-origin: left center;
+    animation: glassBreak 0.15s ease-out forwards;
+}
+
+/* Боковые ответвления трещины */
+.scrimer-crack::after {
+    content: '';
+    position: absolute;
+    width: calc(var(--crack-length, 150px) * 0.4);
+    height: 1.5px;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.8) 0%,
+            rgba(180, 180, 180, 0.9) 50%,
+            transparent 100%);
+    box-shadow:
+        0 0 1px rgba(255, 255, 255, 0.6),
+        0 1px 0 rgba(0, 0, 0, 0.2);
+    transform: rotate(calc(var(--crack-angle, 0deg) + var(--branch-angle, 35deg)));
+    transform-origin: left center;
+    left: calc(var(--crack-length, 150px) * 0.3);
+    animation: glassBreak 0.2s ease-out 0.05s forwards;
+    opacity: 0;
+}
+
+/* Точка удара */
+.crack-impact {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(200, 200, 200, 0.6) 30%,
+            transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: impactFlash 0.3s ease-out forwards;
+    box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes glassBreak {
+    0% {
+        transform: rotate(var(--crack-angle, 0deg)) scaleX(0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotate(var(--crack-angle, 0deg)) scaleX(1);
+        opacity: 0.9;
+    }
+}
+
+@keyframes impactFlash {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.4;
+    }
+}
+
 /* ========== СТРАНИЦА ДЕДА МОРОЗА ========== */
 #santa-page {
-    background: 
+    background:
         radial-gradient(ellipse at 30% 20%, rgba(0, 212, 255, 0.15) 0%, transparent 40%),
         radial-gradient(ellipse at 70% 80%, rgba(0, 150, 255, 0.1) 0%, transparent 40%),
         linear-gradient(180deg, #0a1628 0%, #0d1f3c 50%, #0a1628 100%);
@@ -791,7 +960,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
+    background-image:
         radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
         radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 100px 100px;
@@ -812,7 +981,7 @@ body {
     border-radius: 25px;
     padding: 50px;
     border: 2px solid rgba(0, 212, 255, 0.3);
-    box-shadow: 
+    box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.5),
         0 0 40px var(--snow-glow),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -860,17 +1029,29 @@ body {
 
 /* ========== ФИНАЛЬНАЯ СТРАНИЦА ========== */
 #final-page {
-    background: 
-        radial-gradient(ellipse at 20% 20%, rgba(0, 212, 255, 0.15) 0%, transparent 40%),
-        radial-gradient(ellipse at 80% 30%, rgba(255, 107, 0, 0.1) 0%, transparent 40%),
-        radial-gradient(ellipse at 50% 80%, rgba(0, 255, 65, 0.08) 0%, transparent 40%),
-        linear-gradient(180deg, #0a1628 0%, #0d1f3c 30%, #061020 100%);
-    background-size: 100% 100%;
+    background:
+        radial-gradient(ellipse at 30% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 70%, rgba(0, 255, 65, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, #080c14 0%, #0a1520 50%, #060a10 100%);
     justify-content: center;
     align-items: center;
     color: #fff;
     position: relative;
     overflow: hidden;
+}
+
+#final-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
 }
 
 .snowflakes-final {
@@ -885,23 +1066,23 @@ body {
 }
 
 .final-container {
-    max-width: 850px;
-    width: 95%;
+    max-width: 700px;
+    width: 92%;
     text-align: center;
     position: relative;
     z-index: 10;
 }
 
 .final-content {
-    background: linear-gradient(135deg, rgba(10, 40, 80, 0.6) 0%, rgba(5, 20, 40, 0.8) 100%);
-    backdrop-filter: blur(20px);
-    border-radius: 30px;
-    padding: 50px;
-    box-shadow: 
-        0 25px 80px rgba(0, 0, 0, 0.5),
-        0 0 60px var(--snow-glow),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(0, 212, 255, 0.2);
+    background: rgba(10, 20, 35, 0.85);
+    backdrop-filter: blur(25px);
+    border-radius: 24px;
+    padding: 45px 40px;
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     position: relative;
 }
 
@@ -909,138 +1090,144 @@ body {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--frost-blue), var(--stalcraft-green), var(--frost-blue));
-    border-radius: 30px 30px 0 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.5), transparent);
 }
 
 .final-title {
     font-family: 'Russo One', sans-serif;
-    font-size: 3.5rem;
-    margin-bottom: 35px;
-    background: linear-gradient(135deg, var(--frost-blue) 0%, var(--frost-white) 50%, var(--stalcraft-green) 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 3s linear infinite;
-    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+    font-size: 2.8rem;
+    margin-bottom: 30px;
+    color: #fff;
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+    letter-spacing: 1px;
+}
+
+.final-title::before,
+.final-title::after {
+    content: '✦';
+    margin: 0 15px;
+    color: var(--frost-blue);
+    font-size: 0.6em;
+    vertical-align: middle;
+    opacity: 0.7;
 }
 
 .poem {
-    font-size: 1.3rem;
-    line-height: 2;
+    font-size: 1.15rem;
+    line-height: 1.9;
     margin-bottom: 35px;
-    color: rgba(255, 255, 255, 0.9);
-    font-style: italic;
-    padding: 25px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
-    border-left: 4px solid var(--frost-blue);
+    color: rgba(255, 255, 255, 0.85);
+    padding: 25px 30px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    border-left: 3px solid rgba(0, 212, 255, 0.4);
+    font-style: normal;
+    text-align: left;
 }
 
 .poem p {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .gift-box {
-    background: linear-gradient(135deg, rgba(255, 107, 0, 0.15) 0%, rgba(255, 215, 0, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.08) 0%, rgba(255, 215, 0, 0.05) 100%);
     border-radius: 20px;
-    padding: 35px;
+    padding: 35px 30px;
     margin-bottom: 25px;
-    border: 2px solid rgba(255, 107, 0, 0.3);
+    border: 1px solid rgba(255, 107, 0, 0.2);
     position: relative;
-    min-height: 220px;
-    box-shadow: 0 0 40px rgba(255, 107, 0, 0.15);
+    min-height: 200px;
 }
 
 .gift-box::before {
     content: '🎁';
     position: absolute;
-    top: -25px;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 50px;
-    animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-10px); }
+    font-size: 40px;
+    filter: drop-shadow(0 4px 15px rgba(255, 107, 0, 0.4));
 }
 
 .gift-box h2 {
     font-family: 'Russo One', sans-serif;
-    font-size: 2rem;
-    margin-bottom: 20px;
-    margin-top: 15px;
-    color: var(--stalcraft-orange);
-    text-shadow: 0 0 15px var(--glow-orange);
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: normal;
+    letter-spacing: 1px;
 }
 
 .gift-amount {
     font-family: 'Russo One', sans-serif;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    background: linear-gradient(135deg, var(--stalcraft-yellow) 0%, var(--stalcraft-orange) 50%, var(--stalcraft-yellow) 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 2s linear infinite;
+    color: var(--stalcraft-orange);
+    text-shadow: 0 0 25px rgba(255, 107, 0, 0.5);
     margin-bottom: 25px;
-    filter: drop-shadow(0 0 15px var(--glow-orange));
 }
 
 .btn-gift {
-    padding: 18px 50px;
-    font-size: 1.4rem;
-    background: linear-gradient(135deg, var(--stalcraft-green) 0%, #00cc33 50%, var(--stalcraft-green) 100%);
-    background-size: 200% 200%;
+    padding: 16px 45px;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, var(--stalcraft-green) 0%, #00cc33 100%);
     color: #000;
     border: none;
-    border-radius: 15px;
+    border-radius: 12px;
     cursor: pointer;
     font-family: 'Russo One', sans-serif;
     font-weight: bold;
-    letter-spacing: 2px;
-    box-shadow: 
-        0 5px 25px var(--glow-green),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 1px;
+    box-shadow:
+        0 4px 20px rgba(0, 255, 65, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.25s ease;
     position: relative;
     z-index: 10;
     text-transform: uppercase;
 }
 
 .btn-gift:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 
-        0 10px 40px var(--glow-green),
-        0 0 60px rgba(0, 255, 65, 0.3);
-    background-position: 100% 50%;
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 30px rgba(0, 255, 65, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .btn-gift:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(0);
 }
 
 .btn-gift:disabled {
-    opacity: 0.7;
+    opacity: 0.6;
     cursor: not-allowed;
     transform: none;
 }
 
 .joke {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.7;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
-    font-style: italic;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+/* ========== FLASH BURST ANIMATION ========== */
+@keyframes flashBurst {
+    0% {
+        opacity: 1;
+        background: rgba(255, 107, 0, 0.4);
+    }
+
+    100% {
+        opacity: 0;
+        background: transparent;
+    }
 }
 
 /* ========== АДАПТИВНОСТЬ ========== */
@@ -1048,108 +1235,108 @@ body {
     .main-title {
         font-size: 2.5rem;
     }
-    
+
     .stalcraft-badge {
         font-size: 1rem;
         padding: 6px 18px;
     }
-    
+
     .zone-emblem {
         width: 80px;
         height: 80px;
         font-size: 40px;
     }
-    
+
     .subtitle {
         font-size: 1.1rem;
     }
-    
+
     .quiz-container {
         padding: 25px;
     }
-    
+
     .quiz-header h2 {
         font-size: 1.5rem;
     }
-    
+
     #question-text {
         font-size: 1.2rem;
         padding: 15px;
     }
-    
+
     .answer-btn {
         padding: 15px 18px;
         font-size: 1rem;
     }
-    
+
     .answers {
         grid-template-columns: 1fr;
     }
-    
+
     .final-title {
         font-size: 2rem;
     }
-    
+
     .final-content {
         padding: 30px 20px;
     }
-    
+
     .poem {
         font-size: 1.1rem;
         padding: 20px;
     }
-    
+
     .gift-amount {
         font-size: 2rem;
     }
-    
+
     .btn-gift {
         font-size: 1.1rem;
         padding: 15px 35px;
     }
-    
+
     .gift-box {
         min-height: 180px;
         padding: 25px;
     }
-    
+
     .santa-content h2 {
         font-size: 1.8rem;
     }
-    
+
     .santa-content {
         padding: 30px 20px;
     }
-    
+
     .santa-question {
         font-size: 1.2rem;
     }
-    
+
     .quiz-result-title {
         font-size: 2.5rem;
     }
-    
+
     .quiz-result-score {
         font-size: 2.5rem;
     }
-    
+
     .scrimer-hits {
         font-size: 1.2rem;
         padding: 12px 20px;
     }
-    
+
     .score-title {
         font-size: 2rem;
     }
-    
+
     .score-amount {
         font-size: 4rem;
     }
-    
+
     .score-requirement {
         font-size: 1.1rem;
     }
-    
+
     .snowflake-counter {
         font-size: 1.2rem;
         padding: 12px 25px;
@@ -1160,28 +1347,28 @@ body {
     .main-title {
         font-size: 1.8rem;
     }
-    
+
     .btn {
         padding: 14px 25px;
         font-size: 0.95rem;
         letter-spacing: 1px;
     }
-    
+
     .quiz-container {
         padding: 20px 15px;
         border-radius: 15px;
     }
-    
+
     .final-content {
         padding: 25px 15px;
         border-radius: 20px;
     }
-    
+
     .gift-box::before {
         font-size: 35px;
         top: -18px;
     }
-    
+
     .snowflake-interactive {
         font-size: 2em;
     }
@@ -1202,6 +1389,11 @@ body {
 }
 
 @keyframes scan {
-    0% { top: 0; }
-    100% { top: 100%; }
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 100%;
+    }
 }
